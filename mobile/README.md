@@ -20,8 +20,10 @@ npm install
 #    Default API URL is for Android Emulator: http://10.0.2.2:8000/api/v1
 #    For physical device on local WiFi, change to: http://192.168.x.x:8000/api/v1
 
-# 3. Start Expo dev server
-npx expo start
+# 3. Start Expo dev server (tunnel mode works on any network —
+#    plain `npx expo start` only works when phone + PC share WiFi
+#    and Windows Firewall allows Node)
+npx expo start --tunnel ngrok
 
 # 4. Scan the QR code with the Expo Go app on your phone
 ```
