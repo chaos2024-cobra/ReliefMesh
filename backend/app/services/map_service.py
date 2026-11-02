@@ -85,7 +85,11 @@ def _layer_state(
 def get_map_overview(db: Session) -> MapOverviewResponse:
     """Assemble every marker and network element in one request."""
     incidents: list[Incident] = db.scalars(
-        select(Incident).where(Incident.status == IncidentStatus.ACTIVE).order_by(Incident.id)
+        select(Incident).where(
+            Incident.status.in_(
+                (IncidentStatus.ACTIVE, IncidentStatus.INVESTIGATING, IncidentStatus.REPORTED)
+            )
+        ).order_by(Incident.id)
     ).all()
     centres: list[ReliefCentre] = db.scalars(
         select(ReliefCentre).order_by(ReliefCentre.id)
