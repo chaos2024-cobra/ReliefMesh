@@ -31,13 +31,13 @@ export class ApiError extends Error {
   get hint(): string | null {
     switch (this.code) {
       case 'ai_not_configured':
-        return 'The Gemini API key is not configured on the backend. Add GEMINI_API_KEY to backend/.env and restart the server.';
+        return 'The AI provider key is not configured on the backend. Add it to the Render environment and redeploy.';
       case 'ai_quota_exceeded':
-        return 'Gemini API quota exhausted. Wait before retrying; the request was not retried automatically.';
+        return 'The AI provider rate limit was hit (free tier throttles per minute). It resets automatically — wait ~30-60 seconds and send again.';
       case 'ai_upstream_error':
-        return 'The Gemini upstream service is unavailable right now. The backend did not modify any data.';
+        return 'The AI upstream service is unavailable right now. The backend did not modify any data.';
       case 'ai_timeout':
-        return 'The Gemini request timed out. Try a shorter question.';
+        return 'The AI request timed out. Try a shorter question.';
       case 'validation_error':
         return 'The backend rejected this request payload.';
       case 'not_found':
